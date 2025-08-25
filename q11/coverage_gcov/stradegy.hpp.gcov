@@ -1,0 +1,209 @@
+        -:    0:Source:stradegy.hpp
+        -:    0:Graph:./objectActive.gcno
+        -:    0:Data:./objectActive.gcda
+        -:    0:Runs:3
+        -:    1:#pragma once
+        -:    2:
+        -:    3:#include "Algorithms.hpp"
+        -:    4:#include "Graph.hpp"
+        -:    5:#include<string>
+        -:    6:#include <iostream>
+        -:    7:using namespace std;
+        -:    8:using namespace graph;
+        -:    9:
+        -:   10:
+        -:   11:class stradegy{
+        -:   12://    virtual  void print()=0;
+        -:   13:public:
+       4*:   14:   virtual ~stradegy(){}
+------------------
+_ZN8stradegyD0Ev:
+function _ZN8stradegyD0Ev called 0 returned 0% blocks executed 0%
+    #####:   14:   virtual ~stradegy(){}
+call    0 never executed
+call    1 never executed
+------------------
+_ZN8stradegyD2Ev:
+function _ZN8stradegyD2Ev called 4 returned 100% blocks executed 100%
+        4:   14:   virtual ~stradegy(){}
+------------------
+function _ZN8stradegy3runB5cxx11ERN5graph5GraphEii called 0 returned 0% blocks executed 0%
+    #####:   15:   virtual string run(Graph& g,int start,int end){return "null";};
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+        -:   16:};
+        -:   17:class Euler_circle: public stradegy{
+function _ZN12Euler_circle3runB5cxx11ERN5graph5GraphEii called 1 returned 100% blocks executed 47%
+        1:   18:    string run( Graph& g, int start,int end){
+        1:   19:        bool t= Algorithms::Euler_circle(g,start);
+call    0 returned 100%
+        1:   20:        if(t){
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:   21:            return "Euler circle";
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed (throw)
+call    3 never executed
+        -:   22:        }
+        2:   23:        return "not Euler circle";
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        -:   24:    }
+        -:   25:
+        -:   26:};
+        -:   27:
+        -:   28:class fordFulkerson:public stradegy{
+function _ZN13fordFulkerson3runB5cxx11ERN5graph5GraphEii called 1 returned 100% blocks executed 78%
+        1:   29:    string run(Graph& g,int start,int end){
+        1:   30:        vector<std::vector<int>> cap=graphToVec(g);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        1:   31:        int maxflow = Algorithms::fordFulkerson(cap, start, end);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        2:   32:        return to_string(maxflow);
+call    0 returned 100%
+        -:   33:
+        1:   34:    }
+call    0 returned 100%
+call    1 never executed
+        -:   35:
+        -:   36:    private:
+function _ZN13fordFulkerson10graphToVecERN5graph5GraphE called 1 returned 100% blocks executed 66%
+        1:   37:    vector<std::vector<int>> graphToVec(Graph& g){   
+        -:   38:
+        -:   39:    // std::vector<std::vector<int>> convertGraphToAdjMatrix(const graph::Graph& g) {
+        1:   40:    int n = g.getNumVertices();  // מספר הצמתים בגרף
+call    0 returned 100%
+        1:   41:    std::vector<std::vector<int>> cap(n, std::vector<int>(n, 0));  // אתחול מטריצה בגודל n*n עם כל הערכים ב-0
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0% (throw)
+call    6 returned 100%
+call    7 returned 100%
+call    8 returned 100%
+call    9 never executed
+call   10 never executed
+        -:   42:
+        -:   43:    // עוברים על כל הצמתים
+        1:   44:    for (int i = 0; i < n; ++i) {
+branch  0 taken 100%
+branch  1 taken 0% (fallthrough)
+        -:   45:        // מקבלים את רשימת השכנות של הצומת i
+        1:   46:        graph::Neighbor** adjList = g.getAdjList();
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        1:   47:        graph::Neighbor* neighbor = adjList[i];
+        -:   48:
+        -:   49:        // עוברים על כל השכנים של הצומת i
+        5:   50:        while (neighbor) {
+branch  0 taken 80%
+branch  1 taken 20% (fallthrough)
+        4:   51:            int j = neighbor->vertex;  // הצומת השכן
+        4:   52:            int weight = neighbor->weight;  // המשקל של הקשת
+        -:   53:
+        -:   54:            // ממלאים את המטריצה עם המשקל של הקשת בשני כיוונים, כי הגרף לא מכוון
+        4:   55:            cap[i][j] = weight;
+call    0 returned 100%
+call    1 returned 100%
+        4:   56:            cap[j][i] = weight;
+call    0 returned 100%
+call    1 returned 100%
+        -:   57:
+        -:   58:            // ממשיכים לשכן הבא
+        4:   59:            neighbor = neighbor->next;
+        -:   60:        }
+        -:   61:    
+        -:   62:
+        1:   63:    return cap;
+        -:   64:}
+        -:   65:
+        -:   66:
+    =====:   67:    }
+call    0 never executed
+        -:   68:
+        -:   69:};
+        -:   70:
+        -:   71:class countCliques:public stradegy{
+        -:   72:    string run(Graph& g,int start,int end){
+        -:   73:        int num=Algorithms::countCliques(g, start);
+        -:   74:        return  to_string(num);
+        -:   75:    }
+        -:   76:
+        -:   77:};
+        -:   78:
+        -:   79:class findMaxClique:public stradegy{
+        -:   80:    public:
+function _ZN13findMaxCliqueC2Ev called 1 returned 100% blocks executed 100%
+        1:   81:    findMaxClique(){}
+call    0 returned 100%
+function _ZN13findMaxClique3runB5cxx11ERN5graph5GraphEii called 1 returned 100% blocks executed 80%
+        1:   82:    string run(Graph& g,int start,int end) override{
+        1:   83:        vector<int> maxClique =Algorithms::findMaxClique(g, start);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        2:   84:        return to_string(maxClique.size());
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0% (throw)
+        1:   85:    }
+call    0 returned 100%
+call    1 never executed
+        -:   86:
+        -:   87:};
+        -:   88:
+        -:   89:
+        -:   90:class kruskalMST:public stradegy{
+function _ZN10kruskalMST3runB5cxx11ERN5graph5GraphEii called 1 returned 100% blocks executed 85%
+        1:   91:    string run(Graph& g,int start,int end){
+        1:   92:         vector<Algorithms::Edge> edges;
+call    0 returned 100%
+        -:   93:    
+        -:   94:    {
+        1:   95:        auto adj = g.getAdjList();
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+       11:   96:        for (int u = 0; u < end; ++u) {
+branch  0 taken 91%
+branch  1 taken 9% (fallthrough)
+       30:   97:            for (Neighbor* cur = adj[u]; cur; cur = cur->next) {
+branch  0 taken 67%
+branch  1 taken 33% (fallthrough)
+       20:   98:                int v = cur->vertex, w = cur->weight;
+       20:   99:                if (u < v) edges.push_back({u, v, w});
+branch  0 taken 50% (fallthrough)
+branch  1 taken 50%
+call    2 returned 100%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0% (throw)
+        -:  100:            }
+        -:  101:        }
+        -:  102:    }
+        -:  103:
+        -:  104:  
+        -:  105:
+        -:  106:    // ייתכן שאצלך יש operator< ל-Edge; אם לא, נסדר מיון לפי weight לפני הקריאה (kruskalMST ממיין שוב).
+        1:  107:    int mstWeight = Algorithms::kruskalMST(end, edges);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+        2:  108:    return to_string(mstWeight);
+call    0 returned 100%
+        -:  109:    
+        1:  110:    }
+call    0 returned 100%
+call    1 never executed
+        -:  111:
+        -:  112:};

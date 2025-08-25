@@ -1,0 +1,54 @@
+        -:    0:Source:Graph.hpp
+        -:    0:Graph:./Graph.gcno
+        -:    0:Data:./Graph.gcda
+        -:    0:Runs:3
+        -:    1:#ifndef GRAPH_HPP
+        -:    2:#define GRAPH_HPP
+        -:    3:#include <set>
+        -:    4:#include <utility>
+        -:    5:using namespace std;
+        -:    6:namespace graph {
+        -:    7:
+        -:    8:    struct Neighbor {
+        -:    9:        int vertex;
+        -:   10:        int weight;
+        -:   11:        Neighbor* next;
+        -:   12:
+function _ZN5graph8NeighborC2EiiPS0_ called 98 returned 100% blocks executed 100%
+       98:   13:        Neighbor(int v, int w, Neighbor* n = nullptr)
+       98:   14:            : vertex(v), weight(w), next(n) {}
+        -:   15:        
+        -:   16:    };
+        -:   17:
+        -:   18:    class Graph {
+        -:   19:    private:
+        -:   20:        int numVertices;
+        -:   21:        Neighbor** adjList;
+        -:   22:
+        -:   23:        void removeFromList(int from, int to);
+        -:   24:
+        -:   25:    public:
+        -:   26:        Graph(int vertices);
+        -:   27:        ~Graph();
+        -:   28:        Graph(const Graph& other);
+        -:   29:
+        -:   30:        void addEdge(int from, int to, int weight = 1);
+        -:   31:        void removeEdge(int from, int to);
+        -:   32:        void print_graph() const;
+        -:   33:        bool isEven() const;
+        -:   34:        Graph generateRandomGraph (int v , int e);
+        -:   35:        bool isInside(set<pair<int,int>> used_pairs,int a, int b );
+        -:   36:        int getNumOfNeighbors(int i) const;
+        -:   37:        Graph& operator=(const Graph& other);
+        -:   38:        static Neighbor* cloneList(Neighbor* head) ;
+        -:   39:
+        -:   40:
+        -:   41:        
+        -:   42:
+        -:   43:        int getNumVertices() const;
+        -:   44:        Neighbor** getAdjList() const;
+        -:   45:    };
+        -:   46:
+        -:   47:}
+        -:   48:
+        -:   49:#endif

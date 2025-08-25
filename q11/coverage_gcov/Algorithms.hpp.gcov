@@ -1,0 +1,30 @@
+        -:    0:Source:Algorithms.hpp
+        -:    0:Graph:./Algorithms.gcno
+        -:    0:Data:./Algorithms.gcda
+        -:    0:Runs:3
+        -:    1:#pragma once
+        -:    2:#include <vector>
+        -:    3:#include "Graph.hpp"
+        -:    4:
+        -:    5:namespace graph {
+        -:    6:    class Algorithms {
+        -:    7:
+        -:    8:    public:
+        -:    9:            struct Edge {
+        -:   10:        int u, v, weight;
+function _ZNK5graph10Algorithms4EdgeltERKS1_ called 36 returned 100% blocks executed 100%
+       36:   11:        bool operator<(const Edge& other) const {
+       36:   12:            return weight < other.weight;
+        -:   13:    }
+        -:   14:};
+        -:   15:       static bool Euler_circle(const Graph& g, int start); 
+        -:   16:       static bool bfs(vector<vector<int>>& rGraph, int s, int t, vector<int>& parent);
+        -:   17:       static int kruskalMST(int n, vector<Edge>& edges);
+        -:   18:       static void unionSets(int u, int v, vector<int>& parent, vector<int>& rank);
+        -:   19:       static int findParent(int node, vector<int>& parent);
+        -:   20:       static int fordFulkerson(vector<vector<int>>& graph, int s, int t);
+        -:   21:       static int countCliques(const Graph& g, int n);
+        -:   22:       static vector<int> findMaxClique(const Graph& g, int n);
+        -:   23:       static bool isClique(const Graph& g, const vector<int>& nodes);
+        -:   24:    };
+        -:   25:}
