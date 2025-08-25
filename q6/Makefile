@@ -26,7 +26,7 @@ $(BIN_CLIENT): $(SRCS_CLIENT) $(HDRS)
 clean:
 	rm -f $(BIN_SERVER) $(BIN_CLIENT)
 
-# Convenience targets (אפשר לשנות PORT ו-IP בקומנדליין)
+
 PORT ?= 8080
 IP ?= 127.0.0.1
 
