@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
     while ((opt = getopt(argc, argv, "v:e:r:")) != -1) {
         switch (opt) {
             case 'v':
-                vertex = atoi(optarg); // המרה ממחרוזת למספר
+                vertex = atoi(optarg); 
                 break;
             case 'e':
                 edge = atoi(optarg);
