@@ -1,14 +1,12 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra -pedantic
 
-# ברירת מחדל: לקמפל ואז להריץ
+
 all: run
 
-# הלינק הסופי
 main: Main.o Algorithms.o Graph.o
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-# קומפילציית קבצים בודדים עם תלויות על ההדרים
 Main.o: Main.cpp Algorithms.hpp Graph.hpp
 	$(CXX) $(CXXFLAGS) -c $<
 
@@ -18,11 +16,9 @@ Algorithms.o: Algorithms.cpp Algorithms.hpp Graph.hpp
 Graph.o: Graph.cpp Graph.hpp
 	$(CXX) $(CXXFLAGS) -c $<
 
-# להריץ את התוכנית
 run: main
 	./main
 
-# ניקוי
 clean:
 	rm -f *.o main
 
